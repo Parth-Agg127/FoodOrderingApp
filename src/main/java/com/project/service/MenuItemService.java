@@ -6,13 +6,15 @@ import java.util.List;
 
 public interface MenuItemService {
     // Define methods for menu item operations, e.g., add, update, delete, get by ID, etc.
-    void addMenuItem(Long restaurantId, String name, String description, double price);
+    List<MenuItem> addMenuItems(Long restaurantId, List<MenuItem> menuItems);
 
-    void updateMenuItem(Long menuItemId, String name, String description, double price);
+    MenuItem updateMenuItem(Long menuItemId, MenuItem menuItem);
 
     void deleteMenuItem(Long menuItemId);
 
     MenuItem getMenuItemById(Long menuItemId);
 
     List<MenuItem> getAllMenuItemsByRestaurant(Long restaurantId);
+
+    List<MenuItem> getAllMenuItems();
 }

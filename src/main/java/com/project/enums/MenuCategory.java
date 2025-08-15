@@ -1,5 +1,8 @@
 package com.project.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum MenuCategory {
     APPETIZER("Appetizer"),
     MAIN_COURSE("Main Course"),
@@ -16,16 +19,13 @@ public enum MenuCategory {
     SNACKS("Snacks"),
     BREAKFAST("Breakfast"),
     LUNCH("Lunch"),
-    DINNER("Dinner");
+    DINNER("Dinner"),
+    PASTA("Pasta");
 
     private final String displayName;
 
     MenuCategory(String displayName) {
         this.displayName = displayName;
-    }
-
-    public String getDisplayName() {
-        return displayName;
     }
 
     @Override

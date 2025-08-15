@@ -1,38 +1,35 @@
 package com.project.service;
 
+import com.project.dto.OrderItemDTO;
+import com.project.dto.OrderResponseDTO;
 import com.project.entity.Order;
 import com.project.entity.OrderItem;
 import com.project.enums.OrderStatus;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderService {
     //give me all the required methods for the class OrderService
-    void createOrder(Long customerId, Long couponId, List<Long> orderItemIds);
+    Order createOrder(Long customerId, Long restaurantId, Long couponId, List<OrderItemDTO> orderItemsDTO,String deliveryAddress);
 
-    List<Order> getAllOrders();
+    List<OrderResponseDTO> getAllOrdersDTO();
+
+    Order applyCoupon(Long orderId, String couponCode, String customerEmail);
 
     Order getOrderById(Long orderId);
-
-    Order updateOrder(Long orderId, Order updatedOrder);
 
     void deleteOrder(Long orderId);
 
     List<Order> getOrdersByCustomer(Long customerId);
 
-    List<Order> getOrdersByRestaurant(Long restaurantId);
-
+    List<OrderResponseDTO> getOrdersByRestaurant(Long restaurantId);
 
     List<Order> getOrdersByDateRange(LocalDate startDate, LocalDate endDate);
 
     double calculateTotalPrice(Long orderId);
-
-    void applyCouponToOrder(Long orderId, Long couponId);
-
-    void addOrderItemToOrder(Long orderId, Long orderItemId);
-
-    void removeOrderItemFromOrder(Long orderId, Long orderItemId);
 
     List<OrderItem> getOrderItemsByOrder(Long orderId);
 
@@ -44,11 +41,6 @@ public interface OrderService {
 
     void completeOrder(Long orderId);
 
-    List<Order> getOrdersByCustomerAndStatus(Long customerId, OrderStatus status);
-
     List<Order> getOrdersByRestaurantAndStatus(Long restaurantId, OrderStatus status);
 
-    List<Order> getOrdersByCustomerAndDateRange(Long customerId, LocalDate startDate, LocalDate endDate);
-
-    List<Order> getOrdersByRestaurantAndDateRange(Long restaurantId, LocalDate startDate,LocalDate endDate);
-}
+   }

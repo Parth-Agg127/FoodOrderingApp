@@ -1,5 +1,8 @@
 package com.project.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum CuisineType {
     INDIAN("Indian"),
     CHINESE("Chinese"),
@@ -21,10 +24,6 @@ public enum CuisineType {
 
     CuisineType(String displayName) {
         this.displayName = displayName;
-    }
-
-    public String getDisplayName() {
-        return displayName;
     }
 
     @Override

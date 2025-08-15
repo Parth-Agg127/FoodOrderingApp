@@ -1,15 +1,14 @@
 package com.project.entity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.enums.CuisineType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-//
 @Entity
 @Table(name = "restaurants")
+@Data
 public class Restaurant {
 
         @Id
@@ -34,8 +33,8 @@ public class Restaurant {
 
 
 
-        // One restaurant can have multiple menu items
         @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+        @JsonManagedReference
         private List<MenuItem> menuItems = new ArrayList<>();
 
         // Constructors
@@ -47,24 +46,5 @@ public class Restaurant {
 
             this.cuisineType = cuisineType;
         }
-
-        // Getters and Setters
-        public Long getId() { return id; }
-        public void setId(Long id) { this.id = id; }
-
-        public String getName() { return name; }
-        public void setName(String name) { this.name = name; }
-
-        public String getAddress() { return address; }
-        public void setAddress(String address) { this.address = address; }
-
-
-        public CuisineType getCuisineType() { return cuisineType; }
-        public void setCuisineType(CuisineType cuisineType) { this.cuisineType = cuisineType; }
-
-
-        public List<MenuItem> getMenuItems() { return menuItems; }
-        public void setMenuItems(List<MenuItem> menuItems) { this.menuItems = menuItems; }
-
-    }
+}
 

@@ -3,7 +3,10 @@ package com.project.repository;
 import com.project.entity.MenuItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface MenuItemRepository extends JpaRepository<MenuItem, Long> {
-    // This interface will automatically provide CRUD operations for MenuItem entities
-    // Additional custom query methods can be defined here if needed
+    List<MenuItem> findByRestaurantId(Long restaurantId);
+
+
 }

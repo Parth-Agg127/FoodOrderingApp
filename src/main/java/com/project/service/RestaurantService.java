@@ -6,7 +6,7 @@ import com.project.enums.CuisineType;
 import java.util.List;
 import java.util.Optional;
 
-public interface RestaruantService {
+public interface RestaurantService {
     Restaurant createRestaurant(Restaurant restaurant);
 
     List<Restaurant> getAllRestaurants();

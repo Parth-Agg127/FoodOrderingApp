@@ -6,9 +6,11 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
 
 @Entity
 @Table(name = "coupons")
+@Data
 public class Coupon {
 
     @Id
@@ -20,6 +22,10 @@ public class Coupon {
     @Column(nullable = false, unique = true, length = 50)
     private String code;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "coupon_type", nullable = false)
+    private CouponType type;
 
     @DecimalMin(value = "0.0", message = "Discount value cannot be negative")
     @Column(name = "discount_value", nullable = false, columnDefinition = "decimal(8,2)")
@@ -32,9 +38,12 @@ public class Coupon {
     @NotNull(message = "Valid until date is required")
     @Column(name = "valid_until", nullable = false)
     private LocalDateTime validUntil;
+
     @OneToMany(mappedBy = "coupon")
     private List<Order> orders = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "coupons", fetch = FetchType.LAZY)
+    private List<Customer> customers = new ArrayList<>();
 
 
     // Constructors
@@ -50,21 +59,7 @@ public class Coupon {
     }
 
 
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
 
-    public String getCode() { return code; }
-    public void setCode(String code) { this.code = code; }
-
-    public Double getDiscountValue() { return discountValue; }
-    public void setDiscountValue(Double discountValue) { this.discountValue = discountValue; }
-
-    public LocalDateTime getValidFrom() { return validFrom; }
-    public void setValidFrom(LocalDateTime validFrom) { this.validFrom = validFrom; }
-
-    public LocalDateTime getValidUntil() { return validUntil; }
-    public void setValidUntil(LocalDateTime validUntil) { this.validUntil = validUntil; }
 
 
 }

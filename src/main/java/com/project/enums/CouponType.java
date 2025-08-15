@@ -1,5 +1,8 @@
 package com.project.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum CouponType {
     PERCENTAGE("Percentage"),
     FIXED_AMOUNT("Fixed Amount"),
@@ -10,10 +13,6 @@ public enum CouponType {
 
     CouponType(String displayName) {
         this.displayName = displayName;
-    }
-
-    public String getDisplayName() {
-        return displayName;
     }
 
     @Override
